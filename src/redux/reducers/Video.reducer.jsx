@@ -13,8 +13,6 @@ const initialState = {
 
 export const homeVideoReducer = (state = initialState, action) => {
   const { type, payload } = action;
-  console.log(state.activeCategory, "   ", payload?.activeCategory)
-  console.log(payload);
   switch (type) {
     case HOME_VIDEOS_REQUEST:
       return { ...state, loading: true };
@@ -23,7 +21,7 @@ export const homeVideoReducer = (state = initialState, action) => {
         ...state,
         videos:
           state.activeCategory === payload.activeCategory
-            ? [ ...state.videos, ...payload.videos]
+            ? [...state.videos, ...payload.videos]
             : payload.videos,
         loading: false,
         nextPageToken: payload.nextPageToken,
@@ -35,3 +33,24 @@ export const homeVideoReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export const selectedVideoReducer = (
+  state = {
+    loading: true,
+    video: null,
+  },
+  action
+) => {
+  const { type, payload } = action;
+  switch (type) {
+    case "SELECTED_VIDEO_REQUEST":
+      return { ...state, loading: true };
+    case "SELECTED_VIDEO_SUCCESS":
+      return { ...state, loading: false, video: payload };
+    case "SELECTED_VIDEO_FAIL":
+      return { ...state, loading: false, error: payload };
+    default:
+      return { ...state};
+  }
+};
+

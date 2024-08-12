@@ -3,6 +3,9 @@ import {
   HOME_VIDEOS_FAIL,
   HOME_VIDEOS_REQUEST,
   HOME_VIDEOS_SUCCESS,
+  SELECTED_VIDEO_FAIL,
+  SELECTED_VIDEO_REQUEST,
+  SELECTED_VIDEO_SUCCESS,
 } from "../ActionType";
 
 //  https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&regionCode=es&videoCategoryId=17&key=[YOUR_API_KEY] HTTP/1.1
@@ -37,7 +40,7 @@ export const getCategoriesVideos = (keyword) => async (dispatch, getState) => {
   console.log(keyword);
   try {
     dispatch({ type: HOME_VIDEOS_REQUEST });
-    const  response  = await request("/search", {
+    const response = await request("/search", {
       params: {
         part: "snippet",
         maxResults: 20,
@@ -58,5 +61,29 @@ export const getCategoriesVideos = (keyword) => async (dispatch, getState) => {
     });
   } catch (error) {
     dispatch({ type: HOME_VIDEOS_FAIL, payload: error.message });
+  }
+};
+
+export const getVideoById = (id) => async (dispatch) => {
+  console.log(id);
+  try {
+    dispatch({
+      type: SELECTED_VIDEO_REQUEST,
+    });
+    const { data } = await request("/videos", {
+      params: {
+        part: "snippet,contentDetails,statistics",
+        id: id,
+      },
+    });
+    dispatch({
+      type: SELECTED_VIDEO_SUCCESS,
+      payload: data.items[0],
+    });
+  } catch (error) {
+    dispatch({
+      type: SELECTED_VIDEO_FAIL,
+      payload: error.message,
+    });
   }
 };

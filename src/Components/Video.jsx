@@ -89,6 +89,10 @@ const Video = ({ video }) => {
   const handleClick = () => {
     navigate(`/watch/${video.id}`);
   };
+  const handleChannelClick = ( ) => {
+    console.log(channelDetails.id);
+    navigate(`/channel/${channelDetails.id}`)
+  }
 
   // Memoized values
   const formattedDuration = useMemo(() => {
@@ -98,9 +102,9 @@ const Video = ({ video }) => {
   }, [duration]);
 
   return (
-    <div onClick={handleClick} className="max-w-xs rounded shadow-lg bg-slate-900 flex flex-col h-full hover:cursor-pointer">
+    <div className="max-w-xs rounded shadow-lg bg-slate-900 flex flex-col h-full hover:cursor-pointer">
       {/* Video thumbnail */}
-      <div className="relative flex-shrink-0">
+      <div className="relative flex-shrink-0" >
         <LazyLoadImage
           className="w-[284.44] h-[160] object-cover"
           src={
@@ -119,7 +123,7 @@ const Video = ({ video }) => {
       {/* Video details */}
       <div className="px-1 py-2 flex-grow flex flex-col justify-between">
         {/* Video title */}
-        <div className="flex items-center mb-2">
+        <div className="flex items-center mb-2" onClick={handleChannelClick}>
           <LazyLoadImage
             className="w-20 h-10 rounded-full"
             src={channelDetails?.snippet?.thumbnails?.high.url}

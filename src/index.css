@@ -2,3 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes likeAnimation {
+  0% {
+    transform: scale(1);
+    color: inherit;
+  }
+  50% {
+    transform: scale(1.5);
+    color: #1d4ed8;
+  } /* Blue for like */
+  100% {
+    transform: scale(1.2);
+    color: #1d4ed8;
+  }
+}
+
+@keyframes dislikeAnimation {
+  0% {
+    transform: scale(1);
+    color: inherit;
+  }
+  50% {
+    transform: scale(1.5);
+    color: #dc2626;
+  } /* Red for dislike */
+  100% {
+    transform: scale(1.2);
+    color: #dc2626;
+  }
+}

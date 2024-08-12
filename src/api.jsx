@@ -2,8 +2,7 @@ import axios from "axios";
 
 
 
-const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
-console.log(apiKey)
+// const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
 
 const request = axios.create({
   baseURL: "https://youtube.googleapis.com/youtube/v3/",
